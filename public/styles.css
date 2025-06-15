@@ -227,12 +227,15 @@ input::placeholder {
     align-items: center;
     z-index: 9999;
     transition: opacity 1s ease;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 /* Estilo do SVG */
 #svg {
-    width: 220px;
-    height: 220px;
+    width: 100%;
+    max-width: 220px;
+    height: auto;
     stroke: #007bff;
     fill: none;
     stroke-width: 40px;
@@ -240,7 +243,9 @@ input::placeholder {
     stroke-dashoffset: 7500;
     animation: draw 3s ease forwards;
     opacity: 0;
+    display: block;
 }
+
 
 /* Fundo branco e centralização */
 #loading {
