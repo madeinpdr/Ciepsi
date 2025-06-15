@@ -244,6 +244,7 @@ input::placeholder {
     animation: draw 3s ease forwards;
     opacity: 0;
     display: block;
+    margin: 0 auto;
 }
 
 
