@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ciepsi+ - Registro</title>
+
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Fontes e Ícones -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    />
+
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="/styles.css" />
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+
+  <body>
+    <div class="container-fluid vh-100 d-flex flex-column flex-md-row p-0">
+      <div class="login-container d-flex justify-content-center align-items-center col-12 col-md-6 bg-white shadow">
+        <div class="login-box text-center p-4 rounded-3 w-100" style="max-width: 400px">
+          <img src="/img/logociepsi.png" alt="Logo Ciepsi+" class="logo mb-3" />
+          <h4 class="mb-4">Registro de Admins/Secretários</h4>
+
+          <!-- Formulário de Registro -->
+          <form id="registerForm" action="/auth/register" method="POST">
+            <!-- Nome -->
+            <div class="mb-3 text-start">
+              <label for="name" class="form-label required">Nome</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                placeholder="Digite seu nome"
+                required
+              />
+              <div id="nameError" class="text-danger small d-none">O nome deve conter apenas letras.</div>
+            </div>
+
+            <!-- E-mail -->
+            <div class="mb-3 text-start">
+              <label for="email" class="form-label required">E-mail</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="Digite um e-mail válido"
+                required
+              />
+              <div id="emailError" class="text-danger small d-none">
+                Digite um e-mail válido (ex: exemplo@dominio.com)
+              </div>
+            </div>
+
+            <!-- Senha -->
+            <div class="mb-3 text-start">
+              <label for="password" class="form-label required">Senha</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                placeholder="Digite sua senha"
+                required
+              />
+              <div class="requirements mt-1 small text-muted">
+                A senha deve conter no mínimo 8 caracteres, incluindo uma letra maiúscula, um número e um símbolo.
+              </div>
+              <div id="passwordError" class="text-danger small d-none">A senha não atende aos requisitos.</div>
+            </div>
+
+            <!-- Confirmação de Senha -->
+            <div class="mb-3 text-start">
+              <label for="passwordConfirm" class="form-label required">Confirme a Senha</label>
+              <input
+                type="password"
+                class="form-control"
+                id="passwordConfirm"
+                name="passwordConfirm"
+                placeholder="Confirme sua senha"
+                required
+              />
+              <div id="confirmError" class="text-danger small d-none">As senhas não coincidem.</div>
+            </div>
+
+            <!-- Botão de Envio -->
+            <button
+              type="submit"
+              class="btn btn-primary w-100 mt-2"
+              id="registerBtn"
+              disabled
+            >
+              Cadastrar <i class="bi bi-person-plus"></i>
+            </button>
+          </form>
+
+          <!-- Pop-up de sucesso/erro com SweetAlert -->
+          <script>
+            {{#if message}}
+              Swal.fire({
+                icon: '{{#if (includes message "sucesso")}}success{{else}}error{{/if}}',
+                title: '{{#if (includes message "sucesso")}}Sucesso!{{else}}Erro!{{/if}}',
+                text: '{{message}}',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK'
+              });
+            {{/if}}
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript de Validação -->
+    <script>
+      const form = document.getElementById('registerForm');
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const confirmInput = document.getElementById('passwordConfirm');
+      const registerBtn = document.getElementById('registerBtn');
+
+      const emailError = document.getElementById('emailError');
+      const passwordError = document.getElementById('passwordError');
+      const confirmError = document.getElementById('confirmError');
+      const nameError = document.getElementById('nameError');
+
+      function validateName(name) {
+        return /^[A-Za-zÀ-ÿ\s]+$/.test(name.trim());
+      }
+
+      function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      function validatePassword(password) {
+        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$/.test(password);
+      }
+
+      function validateForm() {
+        const nameValid = validateName(nameInput.value);
+        const emailValid = validateEmail(emailInput.value);
+        const passwordValid = validatePassword(passwordInput.value);
+        const passwordsMatch = passwordInput.value === confirmInput.value && passwordInput.value.length > 0;
+
+        nameError.classList.toggle('d-none', nameValid);
+        emailError.classList.toggle('d-none', emailValid);
+        passwordError.classList.toggle('d-none', passwordValid);
+        confirmError.classList.toggle('d-none', passwordsMatch);
+
+        registerBtn.disabled = !(nameValid && emailValid && passwordValid && passwordsMatch);
+      }
+
+      nameInput.addEventListener('input', validateForm);
+      emailInput.addEventListener('input', validateForm);
+      passwordInput.addEventListener('input', validateForm);
+      confirmInput.addEventListener('input', validateForm);
+    </script>
+  </body>
+</html>

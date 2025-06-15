@@ -1,0 +1,384 @@
+/* Reset de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body,
+html {
+    height: 100%;
+}
+
+/* Container principal */
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Lado esquerdo com imagem */
+.imagem-lateral {
+    flex: 1.5;
+    background-image: url('img/background-login.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Efeito de opacidade na imagem */
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    /* Ajuste de opacidade */
+}
+
+/* Texto sobre a imagem */
+.texto-imagem {
+    position: absolute;
+    color: #fff;
+    font-size: 42px;
+    font-weight: 500;
+}
+
+/* Lado direito: Login */
+.login-container {
+    flex: 1;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Caixa de login */
+.login-box {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    height: auto;
+    width: 400px;
+    box-shadow: 0 35px 35px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transform: translateY(-30px);
+}
+
+/* Logo */
+.logo {
+    width: 220px;
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+.input-group {
+    text-align: left;
+    margin-bottom: 15px;
+    position: relative;
+    /* Necessário para o posicionamento do ícone */
+
+}
+
+label {
+    font-size: 14px;
+    color: #050505;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid black;
+    /* Borda mais fina */
+    border-radius: 11px;
+    font-size: 18px;
+    outline: none;
+    transition: border-color 0.2s ease-in-out, border-width 0.2s ease-in-out;
+}
+
+/* Mudança de borda ao focar */
+input:focus {
+    border-color: rgb(52, 199, 248);
+    border-width: 2px;
+    /* Mantendo a borda fina */
+}
+
+/* Ícone de olho */
+#btn-senha {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-13%);
+    cursor: pointer;
+    font-size: 20px;
+    color: #000000;
+}
+
+/* Botão de enviar */
+.btn {
+    background-color: rgb(164, 158, 158);
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 11px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* Link "Esqueci minha senha" */
+.esqueci-senha {
+    display: block;
+    margin-top: 10px;
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.esqueci-senha:hover {
+    text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .imagem-lateral {
+        height: 40vh;
+    }
+
+    .login-container {
+        height: 60vh;
+    }
+}
+
+/* Estilização do botão submit (icon) */
+.btn i {
+    margin-left: 8px;
+    font-size: 1.2rem;
+}
+
+/* Quando o mouse passar por cima */
+.btn:hover {
+    background-color: #0056b3;
+    /* Azul mais escuro */
+}
+
+/* Botão desativado (padrão) */
+.btn:disabled {
+    background-color: rgb(216, 216, 216);
+    /* Cinza */
+    color: #888888;
+    /* Texto cinza para visibilidade */
+    cursor: not-allowed;
+}
+
+/* Botão ativado */
+.btn {
+    background-color: #007bff;
+    /* Azul */
+    color: white;
+    /* Texto branco */
+    transition: background-color 0.3s ease-in-out;
+}
+
+input::placeholder {
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    color: #888;
+}
+
+/*Estilização do esqueci a senha */
+.esqueci-senha {
+    color: #000000;
+    /* Cor azul padrão do Bootstrap */
+    transition: color 0.2s ease-in-out;
+}
+
+.esqueci-senha:hover {
+    color: #0a58ca;
+    /* Azul mais escuro no hover */
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.link-hover-primary:hover {
+    color: #0d6efd !important;
+    /* azul padrão Bootstrap */
+    transition: color 0.3s ease;
+}
+
+/* Tela de carregamento cobrindo toda a tela */
+.loading-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1s ease;
+}
+
+/* Estilo do SVG */
+#svg {
+    width: 220px;
+    height: 220px;
+    stroke: #007bff;
+    fill: none;
+    stroke-width: 40px;
+    stroke-dasharray: 7500;
+    stroke-dashoffset: 7500;
+    animation: draw 3s ease forwards;
+    opacity: 0;
+}
+
+/* Fundo branco e centralização */
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* SVG animado */
+#loader-svg path {
+    stroke-dasharray: 7500;
+    stroke-dashoffset: 7500;
+    animation: draw 3s ease forwards;
+}
+
+@keyframes draw {
+    0% {
+        stroke-dashoffset: 7500;
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+}
+
+/* Reset de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body, html {
+    height: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #343a40;
+    height: 100vh;
+    width: 250px;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+}
+
+.sidebar .nav-link {
+    color: white;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.sidebar .nav-link.active {
+    background-color: #007bff;
+}
+
+.sidebar .nav-item i {
+    margin-right: 10px;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.table {
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table .btn {
+    font-size: 14px;
+}
+
+/* Modal */
+.modal-content {
+    border-radius: 10px;
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    background-color: #f8f9fa;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+/* Estilização 'requisitos obrigatórios'(*) */
+.form-label.required::after {
+  content: " *";
+  color: red;
+}
+/* Estilização 'texto' (regra de negócio -> senha) */
+.requirements {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
