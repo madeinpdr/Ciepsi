@@ -4,7 +4,7 @@ const mysql = require("mysql");
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
 const pageRoutes = require('./routes/pages');
-const hbs = require('hbs'); // ✅ IMPORTADO AQUI
+const hbs = require('hbs');
 
 const app = express();
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil com Edição</title>
+  <link rel="stylesheet" href="perfil.css">
+</head>
+
+<body>
+  <div class="profile-card">
+    <img src="/img/Romis.png" alt="Foto de Perfil">
+
+    <div class="profile-field">
+      <label for="name-input"><strong>Nome:</strong></label>
+      <h2 id="name-display">Romes Heriberto</h2>
+      <input type="text" id="name-input" value="Romes Heriberto">
+    </div>
+
+    <div class="profile-field">
+      <label for="bio-input"><strong>Descrição:</strong></label>
+      <p class="bio" id="bio-display">Estagiario Senior em WordPress <br> WordPressシニアインターン <br> ~ Sem Dinhelo sem Tlabaio ~</p>
+      <textarea id="bio-input">Estagiario Senior em WordPressWordPressシニアインターン~ Sem Dinhelo sem Tlabaio ~</textarea>
+    </div>
+
+    <div class="social-links">
+      <div class="social-item">
+        <label for="phone-input"><strong>Telefone:</strong></label>
+        <span id="phone-display">61 4002-8922</span>
+        <input type="text" id="phone-input" value="6140028922">
+      </div>
+
+      <div class="social-item">
+        <label for="email-input"><strong>E-mail:</strong></label>
+        <span id="email-display">romis@gmail.com</span>
+        <input type="text" id="email-input" value="romis@gmail.com">
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button class="edit-btn" onclick="toggleEdit(true)">Editar</button>
+      <button class="reset-btn" id="reset-btn" onclick="resetProfile()">Redefinir</button>
+      <button class="exit" id="exit">Voltar</button>
+      <button class="save-btn" onclick="saveProfile()">Salvar</button>
+      <button class="cancel-btn" onclick="toggleEdit(false)">Cancelar</button>
+    </div>
+
+
+
+    <script src="/js/perfil.js"></script>
+</body>
+
+</html>

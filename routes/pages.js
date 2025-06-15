@@ -13,4 +13,8 @@ router.get('/dashboard', (req, res) => {
     res.render('dashboard'); // Aqui renderiza views/dashboard.hbs
 });
 
+router.get('/perfil', (req, res) => {
+    res.render('perfil');
+});
+
 module.exports = router;

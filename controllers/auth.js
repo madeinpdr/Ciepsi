@@ -153,10 +153,10 @@ if (err) {
       jwtConfig.secret,
       { expiresIn: jwtConfig.expiresIn }
     );
-    const resetUrl = `http://localhost:5002/?token=${token}`;
+    const resetUrl = `https://ciepsi.com.br/?token=${token}`;
     try {
       await transporter.sendMail({
-        from: '"CIEPSI" <pdrthefato@gmail.com>',
+        from: '"CIEPSI" <no-reply@ciepsi.com.br>',
         to: user.email,
         subject: 'Recuperação de Senha',
         html: `
@@ -191,7 +191,7 @@ exports.resetPassword = (req, res) => {
     const decoded = jwt.verify(token, jwtConfig.secret);
 
     // Atualiza senha no banco
-    bcrypt.hash(password, 10, (err, hashedPassword) => {
+    bcrypt.hash(password, 8, (err, hashedPassword) => {
       if (err) throw err;
 
       db.query(
@@ -202,13 +202,13 @@ exports.resetPassword = (req, res) => {
             console.error(err2);
             return res.status(500).render('index', { message: 'Erro ao redefinir senha.' });
           }
-          return res.render('index', { message: 'Senha redefinida com sucesso!' });
+          return res.status(400).json({ message: 'Senha redefinida com sucesso!' });
         }
       );
     });
   } catch (error) {
     console.error(error);
-    return res.status(400).render('index', { message: 'Token inválido ou expirado.' });
+    return res.status(400).json ({ message: 'Token inválido ou expirado.' });
   }
 };
 
