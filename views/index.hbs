@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,9 +12,10 @@
   <link rel="stylesheet" href="/styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body>
   <div class="loading-page">
-<svg id="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 5000" preserveAspectRatio="xMidYMid meet">
+    <svg id="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 5000" preserveAspectRatio="xMidYMid meet">
       <path d="M919 2377 c-93 -39 -151 -97 -194 -192 -20 -47 -25 -51 -73 -64 -92
 -23 -168 -90 -215 -189 -28 -60 -29 -69 -25 -159 l5 -95 -47 -44 c-112 -105
 -142 -300 -67 -436 l20 -38 -29 -57 c-26 -51 -29 -68 -29 -148 0 -78 4 -98 29
@@ -47,11 +49,11 @@
 26 -25 0 -54 -29 -54 -55 0 -46 105 -116 198 -131 51 -8 52 -18 15 -93 -102
 -200 -348 -264 -496 -128 -74 68 -77 80 -77 367 0 137 3 250 6 250 4 0 30 -13
 58 -29 129 -74 332 -81 357 -13 7 18 3 29 -17 49 -24 23 -31 25 -84 20 -106
--12 -237 41 -296 119 l-24 31 0 530 c0 590 -6 544 72 568 57 18 81 18 150 -1z"/>
-<path d="M647 1296 c-9 -10 -17 -26 -17 -37 0 -24 34 -59 58 -59 71 0 149 -54
+-12 -237 41 -296 119 l-24 31 0 530 c0 590 -6 544 72 568 57 18 81 18 150 -1z" />
+      <path d="M647 1296 c-9 -10 -17 -26 -17 -37 0 -24 34 -59 58 -59 71 0 149 -54
 185 -128 29 -60 47 -71 81 -49 18 12 26 26 26 47 0 38 -18 83 -30 75 -5 -3 -7
-0 -4 9 8 21 -56 87 -114 119 -65 35 -161 47 -185 23z"/>
-</svg>
+0 -4 9 8 21 -56 87 -114 119 -65 35 -161 47 -185 23z" />
+    </svg>
     <div class="name-container">
       <div class="logo-name"></div>
     </div>
@@ -67,53 +69,69 @@
         <form id="login-form" method="POST" action="/auth/login">
           <div class="mb-3 text-start position-relative">
             <label for="email" class="form-label">E-mail</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail" required oninput="validarFormulario()" />
+            <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail" required
+              oninput="validarFormulario()" />
           </div>
           <div class="mb-3 text-start position-relative">
             <label for="password" class="form-label">Senha</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha" required oninput="validarFormulario()" />
-            <i class="bi bi-eye-slash position-absolute" id="btn-senha-login" onclick="mostrarSenha('password', 'btn-senha-login')" style="top: 60%; right: 15px; cursor: pointer;"></i>          </div>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha"
+              required oninput="validarFormulario()" />
+            <i class="bi bi-eye-slash position-absolute" id="btn-senha-login"
+              onclick="mostrarSenha('password', 'btn-senha-login')" style="top: 60%; right: 15px; cursor: pointer;"></i>
+          </div>
           <button type="submit" id="submit-btn" class="btn btn-primary w-100" disabled>
             Entrar <i class="bi bi-box-arrow-in-right"></i>
           </button>
           <p class="mt-3 text-muted small">
-            Ao entrar, você concorda com os 
-            <a href="#" class="link-hover-primary text-decoration-underline">Termos de Uso</a> e com a 
-            <a href="#" class="link-hover-primary text-decoration-underline">Política de Privacidade</a> do Ciepsi+.
+            Ao entrar, você concorda com os
+            <a href="#" class="link-hover-primary text-decoration-underline" onclick="abrirTermosUso()">Termos de
+              Uso</a>
+            e com a
+            <a href="#" class="link-hover-primary text-decoration-underline"
+              onclick="abrirPoliticaPrivacidade()">Política de Privacidade</a>
+            do Ciepsi+.
           </p>
-          <a href="#" class="esqueci-senha d-block mt-2 text-decoration-underline" onclick="mostrarRedefinicaoSenha()">Esqueci minha senha</a>
+          <a href="#" class="esqueci-senha d-block mt-2 text-decoration-underline"
+            onclick="mostrarRedefinicaoSenha()">Esqueci minha senha</a>
         </form>
         <div id="redefinir-senha-form" class="d-none text-start">
           <h5 class="mb-3 text-center">Redefina sua senha</h5>
-          <p class="mb-4 text-center">Informe seu endereço de e-mail abaixo e enviaremos as instruções para redefinição de senha:</p>
+          <p class="mb-4 text-center">Informe seu endereço de e-mail abaixo e enviaremos as instruções para redefinição
+            de senha:</p>
           <div class="mb-3">
             <label for="reset-email" class="form-label">E-mail</label>
-            <input type="email" class="form-control" id="reset-email" placeholder="Digite seu e-mail" required oninput="validarRedefinicaoSenha()" />
+            <input type="email" class="form-control" id="reset-email" placeholder="Digite seu e-mail" required
+              oninput="validarRedefinicaoSenha()" />
           </div>
           <button id="reset-btn" class="btn btn-primary w-100 mb-3" disabled>
             Redefinir senha <i class="bi bi-envelope-arrow-up"></i>
           </button>
           <div class="text-center">
-            <a href="#" class="text-decoration-underline text-dark link-hover-primary small" onclick="voltarLogin()">Voltar para o login</a>
+            <a href="#" class="text-decoration-underline text-dark link-hover-primary small"
+              onclick="voltarLogin()">Voltar para o login</a>
           </div>
         </div>
-<div id="nova-senha-area" class="d-none">
-  <label for="nova-senha" class="form-label">Nova Senha</label>
-  <div class="position-relative">
-    <input type="password" class="form-control" id="nova-senha" required />
-    <i class="bi bi-eye-slash position-absolute" id="btn-senha-reset1" onclick="mostrarSenha('nova-senha', 'btn-senha-reset1')" style="top: 25%; right: 15px; cursor: pointer;"></i>
-  </div>
+        <div id="nova-senha-area" class="d-none">
+          <label for="nova-senha" class="form-label">Nova Senha</label>
+          <div class="position-relative">
+            <input type="password" class="form-control" id="nova-senha" required />
+            <i class="bi bi-eye-slash position-absolute" id="btn-senha-reset1"
+              onclick="mostrarSenha('nova-senha', 'btn-senha-reset1')"
+              style="top: 25%; right: 15px; cursor: pointer;"></i>
+          </div>
 
-  <label for="nova-senha-conf" class="form-label mt-2">Confirmar Nova Senha</label>
-  <div class="position-relative">
-    <input type="password" class="form-control" id="nova-senha-conf" required />
-    <i class="bi bi-eye-slash position-absolute" id="btn-senha-reset2" onclick="mostrarSenha('nova-senha-conf', 'btn-senha-reset2')" style="top: 25%; right: 15px; cursor: pointer;"></i>
-  </div>
+          <label for="nova-senha-conf" class="form-label mt-2">Confirmar Nova Senha</label>
+          <div class="position-relative">
+            <input type="password" class="form-control" id="nova-senha-conf" required />
+            <i class="bi bi-eye-slash position-absolute" id="btn-senha-reset2"
+              onclick="mostrarSenha('nova-senha-conf', 'btn-senha-reset2')"
+              style="top: 25%; right: 15px; cursor: pointer;"></i>
+          </div>
 
-  <button id="reset-pass-btn" class="btn btn-success w-100 mt-3">
-    Salvar nova senha
-  </button>
-</div>
+          <button id="reset-pass-btn" class="btn btn-success w-100 mt-3">
+            Salvar nova senha
+          </button>
+        </div>
 
       </div>
     </div>
@@ -132,29 +150,29 @@
     });
 
     function mostrarSenha(inputId, eyeId) {
-  const input = document.getElementById(inputId);
-  const eye = document.getElementById(eyeId);
-  if (input.type === 'password') {
-    input.type = 'text';
-    eye.classList.replace('bi-eye-slash', 'bi-eye');
-  } else {
-    input.type = 'password';
-    eye.classList.replace('bi-eye', 'bi-eye-slash');
-  }
-}
-
-
-  function toggleNovaSenha(inputId, eyeId) {
-    const input = document.getElementById(inputId);
-    const eye = document.getElementById(eyeId);
-    if (input.type === 'password') {
-      input.type = 'text';
-      eye.classList.replace('bi-eye-slash', 'bi-eye');
-    } else {
-      input.type = 'password';
-      eye.classList.replace('bi-eye', 'bi-eye-slash');
+      const input = document.getElementById(inputId);
+      const eye = document.getElementById(eyeId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        eye.classList.replace('bi-eye-slash', 'bi-eye');
+      } else {
+        input.type = 'password';
+        eye.classList.replace('bi-eye', 'bi-eye-slash');
+      }
     }
-  }
+
+
+    function toggleNovaSenha(inputId, eyeId) {
+      const input = document.getElementById(inputId);
+      const eye = document.getElementById(eyeId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        eye.classList.replace('bi-eye-slash', 'bi-eye');
+      } else {
+        input.type = 'password';
+        eye.classList.replace('bi-eye', 'bi-eye-slash');
+      }
+    }
 
 
     function validarFormulario() {
@@ -180,7 +198,7 @@
       resetBtn.disabled = !resetEmail;
     }
 
-    document.getElementById('reset-btn').onclick = async function(e) {
+    document.getElementById('reset-btn').onclick = async function (e) {
       e.preventDefault();
       const email = document.getElementById('reset-email').value;
       const res = await fetch('/auth/forgot-password', {
@@ -194,7 +212,7 @@
       Swal.fire('Redefinição de Senha', msg, 'info');
     };
 
-    window.onload = function() {
+    window.onload = function () {
       const params = new URLSearchParams(window.location.search);
       const token = params.get('token');
       if (token) {
@@ -205,53 +223,53 @@
       }
     };
 
-document.getElementById('login-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
+    document.getElementById('login-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
 
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
 
-  try {
-    const res = await fetch('/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
+      try {
+        const res = await fetch('/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        if (res.ok) {
+          Swal.fire({
+            title: 'Login bem-sucedido!',
+            text: 'Redirecionando...',
+            icon: 'success',
+            timer: 2000,
+            showConfirmButton: false
+          }).then(() => {
+            window.location.href = '/dashboard'; // ajuste o caminho se necessário
+          });
+        } else if (res.status === 401) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Acesso negado',
+            text: 'E-mail ou senha incorretos.'
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro',
+            text: 'Algo deu errado. Tente novamente mais tarde.'
+          });
+        }
+      } catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro de conexão',
+          text: 'Não foi possível conectar ao servidor.'
+        });
+      }
     });
 
-    if (res.ok) {
-      Swal.fire({
-        title: 'Login bem-sucedido!',
-        text: 'Redirecionando...',
-        icon: 'success',
-        timer: 2000,
-        showConfirmButton: false
-      }).then(() => {
-        window.location.href = '/dashboard'; // ajuste o caminho se necessário
-      });
-    } else if (res.status === 401) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Acesso negado',
-        text: 'E-mail ou senha incorretos.'
-      });
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Erro',
-        text: 'Algo deu errado. Tente novamente mais tarde.'
-      });
-    }
-  } catch (err) {
-    Swal.fire({
-      icon: 'error',
-      title: 'Erro de conexão',
-      text: 'Não foi possível conectar ao servidor.'
-    });
-  }
-});
 
-
-    document.getElementById('reset-pass-btn').onclick = async function(e) {
+    document.getElementById('reset-pass-btn').onclick = async function (e) {
       if (!window.tokenResetSenha) return;
       e.preventDefault();
       const senha = document.getElementById('nova-senha').value;
@@ -276,7 +294,60 @@ document.getElementById('login-form').addEventListener('submit', async function(
       try { msg = JSON.parse(data).message; } catch { msg = data; }
       Swal.fire('Senha Redefinida', msg, 'success').then(() => window.location = '/');
     };
+
+    //pop-ups do termo de uso e politica de privacidade
+    function abrirTermosUso() {
+      Swal.fire({
+        title: 'Termos e Condições de Uso – Ciepsi+',
+        html: `
+      <div style="text-align: left; max-height: 300px; overflow-y: auto; font-size: 14px;">
+        <p>Bem-vindo à Ciepsi+, uma plataforma voltada para a gestão de atendimentos psicológicos, comunicação com pacientes e suporte à prática clínica. Estes Termos estabelecem as regras para utilização dos serviços oferecidos por meio da nossa Plataforma.</p>
+        <p><strong>IMPORTANTE:</strong> Ao acessar ou utilizar a Plataforma, você concorda com estes Termos e com nossa Política de Privacidade. Caso não concorde, recomendamos que não utilize os serviços.</p>
+        <p><strong>1. DEFINIÇÕES:</strong> Usuário: pessoa que utiliza a plataforma. Serviços: funcionalidades como agendamento, prontuário, entre outros.</p>
+        <p><strong>2. OBJETO:</strong> A Ciepsi+ oferece soluções online como agendamento, prontuário eletrônico, teleatendimento, cadastro e comunicação com pacientes.</p>
+        <p><strong>3. CADASTRO E SEGURANÇA:</strong> O usuário deve fornecer dados verídicos, manter sua senha segura e notificar sobre usos não autorizados.</p>
+        <p><strong>4. PRIVACIDADE E DADOS:</strong> Tratamos dados conforme a LGPD, com acesso restrito a profissionais autorizados.</p>
+        <p><strong>5. DIREITOS E RESPONSABILIDADES:</strong> Uso ético e legal da plataforma. É proibido inserir dados falsos ou ofensivos.</p>
+        <p><strong>6. LIMITAÇÃO DE RESPONSABILIDADE:</strong> A plataforma apoia a prática profissional, mas os conteúdos e atendimentos são de responsabilidade dos profissionais.</p>
+        <p><strong>7. ALTERAÇÕES:</strong> Os termos podem ser modificados a qualquer momento. O uso contínuo indica concordância com os novos termos.</p>
+        <p><strong>8. CONTATO:</strong> suporte@ciepsi.com.br</p>
+        <p><em>Atualizado em: 16 de junho de 2025</em></p>
+      </div>
+    `,
+        icon: 'info',
+        confirmButtonText: 'Fechar',
+        width: '600px'
+      });
+    }
+
+
+    function abrirPoliticaPrivacidade() {
+      Swal.fire({
+        title: 'Política de Privacidade – Ciepsi+',
+        html: `
+      <div style="text-align: left; max-height: 300px; overflow-y: auto; font-size: 14px;">
+        <p>A Ciepsi+ respeita a sua privacidade e protege seus dados em conformidade com a LGPD (Lei nº 13.709/2018). Esta política se aplica a todos os usuários da plataforma.</p>
+        <p><strong>1. Quem somos:</strong> Plataforma de agendamento, gestão de atendimentos, comunicação e dados clínicos entre psicólogos e pacientes.</p>
+        <p><strong>2. Dados coletados:</strong> Nome, CPF, contato, matrícula (pacientes); CRP, agenda, especialidade (profissionais); dados institucionais (administradores).</p>
+        <p><strong>3. Finalidade:</strong> Gerenciamento de atendimentos, histórico, comunicação, relatórios acadêmicos e obrigações legais.</p>
+        <p><strong>4. Compartilhamento:</strong> Não vendemos dados. Compartilhamento apenas com parceiros técnicos, instituições ou exigência legal, mediante contrato de confidencialidade.</p>
+        <p><strong>5. Segurança:</strong> Dados armazenados com criptografia, autenticação e backups seguros.</p>
+        <p><strong>6. Prazo:</strong> Dados mantidos enquanto houver vínculo com a plataforma ou conforme obrigações legais.</p>
+        <p><strong>7. Direitos:</strong> O usuário pode solicitar acesso, correção, exclusão, anonimização, revogação de consentimento e portabilidade dos dados.</p>
+        <p><strong>8. Contato:</strong> privacidade@ciepsi.com.br</p>
+        <p><em>Última atualização: 16 de junho de 2025</em></p>
+      </div>
+    `,
+        icon: 'info',
+        confirmButtonText: 'Fechar',
+        width: '600px'
+      });
+    }
+
+
+
   </script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 </body>
+
 </html>

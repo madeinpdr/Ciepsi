@@ -159,11 +159,130 @@ emailInput.addEventListener("input", function () {
 
 });
 
-
-
-
 //voltar para o Dashboard
 
 document.getElementById("exit").addEventListener("click", function () {
   window.location.href = "/dashboard";
+});
+
+// Troca a imagem e salva no localStorage
+function trocarImagem(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const imageData = e.target.result;
+      document.getElementById('profile-pic').src = imageData;
+      localStorage.setItem('profileImage', imageData); // Persistência
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+// Carrega imagem salva ao abrir a página
+window.addEventListener('DOMContentLoaded', () => {
+  const savedImage = localStorage.getItem('profileImage');
+  if (savedImage) {
+    document.getElementById('profile-pic').src = savedImage;
+  }
+});
+
+//editar a imagem de perfil
+
+let cropper;
+let imagemCortadaBase64 = null;
+
+// Função para abrir o modal de recorte
+function abrirCropModal(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const cropImage = document.getElementById('crop-image');
+      cropImage.src = e.target.result;
+
+      // Exibe o modal de recorte
+      document.getElementById('crop-modal').style.display = 'flex';
+
+      // Destroi o cropper anterior, se existir
+      if (cropper) {
+        cropper.destroy();
+      }
+
+      // Inicia o cropper
+      cropper = new Cropper(cropImage, {
+        aspectRatio: 1, // Quadrado
+        viewMode: 1,
+      });
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+// Função para confirmar o recorte e aplicar a imagem
+function confirmarRecorte() {
+  if (cropper) {
+    const canvas = cropper.getCroppedCanvas({
+      width: 300,
+      height: 300,
+    });
+
+    imagemCortadaBase64 = canvas.toDataURL('image/png');
+
+    // Atualiza a visualização da imagem
+    document.getElementById('profile-pic').src = imagemCortadaBase64;
+
+    fecharCropModal(); // Fecha o modal
+  }
+}
+
+// Função para fechar o modal de recorte
+function fecharCropModal() {
+  document.getElementById('crop-modal').style.display = 'none';
+  if (cropper) {
+    cropper.destroy();
+    cropper = null;
+  }
+}
+
+// Função para salvar tudo, incluindo a imagem
+function saveProfile() {
+  // Salvar outros campos, se aplicável
+  const name = document.getElementById('name-input').value;
+  const bio = document.getElementById('bio-input').value;
+  const phone = document.getElementById('phone-input').value;
+  const email = document.getElementById('email-input').value;
+
+  localStorage.setItem('name', name);
+  localStorage.setItem('bio', bio);
+  localStorage.setItem('phone', phone);
+  localStorage.setItem('email', email);
+
+  // Salva a imagem recortada, se houver
+  if (imagemCortadaBase64) {
+    localStorage.setItem('profileImage', imagemCortadaBase64);
+  }
+
+  // Atualiza exibição
+  document.getElementById('name-display').textContent = name;
+  document.getElementById('bio-display').textContent = bio;
+  document.getElementById('phone-display').textContent = phone;
+  document.getElementById('email-display').textContent = email;
+
+  toggleEdit(false); // Fecha o modo de edição
+}
+
+// Carregar dados salvos no localStorage
+window.addEventListener('DOMContentLoaded', () => {
+  const savedImage = localStorage.getItem('profileImage');
+  const savedName = localStorage.getItem('name');
+  const savedBio = localStorage.getItem('bio');
+  const savedPhone = localStorage.getItem('phone');
+  const savedEmail = localStorage.getItem('email');
+
+  if (savedImage) document.getElementById('profile-pic').src = savedImage;
+  if (savedName) document.getElementById('name-display').textContent = savedName;
+  if (savedBio) document.getElementById('bio-display').textContent = savedBio;
+  if (savedPhone) document.getElementById('phone-display').textContent = savedPhone;
+  if (savedEmail) document.getElementById('email-display').textContent = savedEmail;
 });

@@ -6,11 +6,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Perfil com Edição</title>
   <link rel="stylesheet" href="perfil.css">
+  <!-- Cropper.js CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet" />
+  <!-- Cropper.js JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 </head>
 
 <body>
   <div class="profile-card">
-    <img src="/img/Romis.png" alt="Foto de Perfil">
+    <img src="/img/Romis.png" alt="Foto de Perfil" id="profile-pic">
+    {{!-- <input type="file" id="image-upload" accept="image/*" onchange="trocarImagem(event)" style="display: none;">
+    <button class="edit-btn" onclick="document.getElementById('image-upload').click()">Trocar Foto</button> --}}
+
+    <!-- Modal de recorte -->
+    <div id="crop-modal" style="display:none;">
+      <div style="text-align:center;">
+        <img id="crop-image" style="max-width: 100%;">
+        <br />
+        <button class="edit-btn" onclick="confirmarRecorte()">Confirmar Recorte</button>
+        <button class="cancel-btn" onclick="fecharCropModal()">Cancelar</button>
+      </div>
+    </div>
+
+    <input type="file" id="image-upload" accept="image/*" style="display: none;" onchange="abrirCropModal(event)">
+    <button class="edit-btn" onclick="document.getElementById('image-upload').click()">Trocar Foto</button>
+
+
+
 
     <div class="profile-field">
       <label for="name-input"><strong>Nome:</strong></label>
@@ -20,7 +42,8 @@
 
     <div class="profile-field">
       <label for="bio-input"><strong>Descrição:</strong></label>
-      <p class="bio" id="bio-display">Estagiario Senior em WordPress <br> WordPressシニアインターン <br> ~ Sem Dinhelo sem Tlabaio ~</p>
+      <p class="bio" id="bio-display">Estagiario Senior em WordPress <br> WordPressシニアインターン <br> ~ Sem Dinhelo sem
+        Tlabaio ~</p>
       <textarea id="bio-input">Estagiario Senior em WordPressWordPressシニアインターン~ Sem Dinhelo sem Tlabaio ~</textarea>
     </div>
 

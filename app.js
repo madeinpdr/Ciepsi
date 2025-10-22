@@ -5,8 +5,6 @@ const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
 const pageRoutes = require('./routes/pages');
 const hbs = require('hbs');
-const session = require('express-session');
-const testesRouter = require('./routes/testes');
 
 const app = express();
 
@@ -64,10 +62,7 @@ app.get("/dashboard", (req, res) => {
 app.use('/auth', authRoutes);
 app.use('/', pageRoutes);
 
-// Rotas de testes
-app.use('/testes', testesRouter); 
-
 // Inicia servidor
-app.listen(5003, () => {
-    console.log("Server started on Port 5003");
+app.listen(5004, () => {
+    console.log("Server started on Port 5004");
 });

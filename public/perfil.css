@@ -156,3 +156,60 @@ body {
   color: white;
   display: none;
 }
+
+#crop-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Fundo escuro e semitransparente */
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  align-items: center;     /* Centraliza o conteúdo verticalmente */
+  z-index: 1000; /* Garantir que o modal fique acima de outros elementos */
+}
+
+#crop-modal > div {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 360px; /* Largura ajustada para o modal */
+  max-height: 500px; /* Limita a altura do modal */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza o conteúdo internamente */
+  align-items: center; /* Garante que o conteúdo dentro da div também fique centralizado */
+}
+
+#crop-image {
+  max-width: 100%; /* Limita a largura da imagem para que ela se ajuste à largura do modal */
+  max-height: 300px; /* Limita a altura da imagem para que ela não ultrapasse os limites do modal */
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo dos botões do modal */
+#crop-modal .edit-btn,
+#crop-modal .cancel-btn {
+  padding: 0.5rem 1.2rem;
+  margin: 0.3rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#crop-modal .edit-btn {
+  background-color: #4A90E2;
+  color: white;
+}
+
+#crop-modal .cancel-btn {
+  background-color: #dc3545;
+  color: white;
+}
